@@ -181,6 +181,17 @@ export default {
         this.focusUserInput()
       }
     })
+
+    document.onpaste = (event) => {
+      var items = (event.clipboardData || event.originalEvent.clipboardData).items
+      for (let index in items) {
+        var item = items[index]
+        if (item.kind === 'file') {
+          this.file = item.getAsFile()
+          break
+        }
+      }
+    }
   },
   methods: {
     cancelFile() {
